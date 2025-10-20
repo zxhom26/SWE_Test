@@ -1,5 +1,5 @@
 import unittest
-from fibonacci import fibonacci
+from fib import fibonacci
 
 class TestFibonacci(unittest.TestCase):
 
