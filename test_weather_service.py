@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 class MockWeatherService(WeatherService):
     def _get_weather_data(self, city: str):
-        return {'main': {'test': 35}}
+        return {'main': {'temp': 35}}
 
 class WeatherServiceTest(unittest.TestCase):
     def setUp(self):
@@ -22,7 +22,7 @@ class WeatherServiceTest(unittest.TestCase):
         self.assertEqual(isHot2, False)
 
     def test_get_greeting(self): 
-        with patch('weather_service.datetime.datetime') as mock_datetime:
+        with patch('weather_service.datetime') as mock_datetime:
             mock_datetime.now.return_value = datetime(2025, 1, 1, 14, 0, 0)
             greeting = self.ws.get_greeting('Zach')
             self.assertEqual(greeting, "Good afternoon, Zach!")
