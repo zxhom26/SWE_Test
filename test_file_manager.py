@@ -12,7 +12,7 @@ class MockFileManager(FileManager):
                 I guess we'll find out.\n
                 ''')
 
-def TestFileManager(unittest.TestCase):
+class TestFileManager(unittest.TestCase):
     def setUp(self):
         self.fs = MockFileManager(base_path='mock_base_path')
 
