@@ -5,9 +5,9 @@ import unittest
 
 class MockFileManager(FileManager):
     def read_file(self, filename: str):
-        return ("This is a test file.\n",
-                "I don't know how many lines this is.\n",
-                "Hopefully four.\n",
+        return ("This is a test file.\n"
+                "I don't know how many lines this is.\n"
+                "Hopefully four.\n"
                 "I guess we'll find out.\n")
 
 class TestFileManager(unittest.TestCase):
