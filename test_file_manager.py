@@ -23,7 +23,7 @@ class TestFileManager(unittest.TestCase):
             self.assertEqual(ex_list, ['file1', 'file2', 'file3', 'file4'])
 
     def test_file_exists(self):
-        with patch('file_manager.os.isfile') as mock_isfile:
+        with patch('file_manager.os.path.isfile') as mock_isfile:
             mock_isfile.return_value = True
             exists = self.fs.file_exists('file1')
             self.assertEqual(exists, True)
