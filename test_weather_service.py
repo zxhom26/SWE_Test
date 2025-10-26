@@ -9,7 +9,7 @@ class MockWeatherService(WeatherService):
 
 class WeatherServiceTest(unittest.TestCase):
     def setUp(self):
-        ws = MockWeatherService(api_url='URL', api_key='KEY')
+        self.ws = MockWeatherService(api_url='URL', api_key='KEY')
 
     def test_get_temperature(self):
         temp = self.ws.get_temperature('Chicago')
@@ -22,7 +22,7 @@ class WeatherServiceTest(unittest.TestCase):
         self.assertEqual(isHot2, False)
 
     def test_get_greeting(self): 
-        with patch('weather_service.datetime') as mock_datetime:
+        with patch('weather_service.datetime.datetime') as mock_datetime:
             mock_datetime.now.return_value = datetime(2025, 1, 1, 14, 0, 0)
             greeting = self.ws.get_greeting('Zach')
             self.assertEqual(greeting, "Good afternoon, Zach!")
