@@ -1,7 +1,8 @@
 import unittest
 from weather_service import WeatherService
 import datetime
-from unittest.mock import patch
+from unittest.mock import patch, Mock
+from datetime import datetime as real_datetime
 
 class MockWeatherService(WeatherService):
     def _get_weather_data(self, city: str):
@@ -21,9 +22,12 @@ class WeatherServiceTest(unittest.TestCase):
         isHot2 = self.ws.is_hot_day('Chicago', threshold=40)
         self.assertEqual(isHot2, False)
 
-    def test_get_greeting(self): 
-        with patch('weather_service.datetime.now') as mock_datetime:
-            mock_datetime.return_value = datetime(2025, 1, 1, 14, 0, 0)
+    def test_get_greeting(self):    
+        with patch('weather_service.datetime') as mock_datetime:
+            mock_datetime.now.return_value = real_datetime(2025, 1, 1, 14, 0, 0)
+            # also allow constructor calls to behave like real datetime
+            mock_datetime.side_effect = lambda *args, **kwargs: real_datetime(*args, **kwargs)
+
             greeting = self.ws.get_greeting('Zach')
             self.assertEqual(greeting, "Good afternoon, Zach!")
 
