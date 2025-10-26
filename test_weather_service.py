@@ -22,8 +22,8 @@ class WeatherServiceTest(unittest.TestCase):
         self.assertEqual(isHot2, False)
 
     def test_get_greeting(self): 
-        with patch('weather_service.datetime') as mock_datetime:
-            mock_datetime.now.return_value = datetime(2025, 1, 1, 14, 0, 0)
+        with patch('weather_service.datetime.now') as mock_datetime:
+            mock_datetime.return_value = datetime(2025, 1, 1, 14, 0, 0)
             greeting = self.ws.get_greeting('Zach')
             self.assertEqual(greeting, "Good afternoon, Zach!")
 
