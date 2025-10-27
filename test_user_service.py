@@ -20,10 +20,9 @@ class MockUserDatabase():
     def user_exists(self, username):
         exists = False
         for user_id in self.db.keys():
-            if username == user_id['username']:
+            if username == self.db['user_id']['username']:
                 exists = True
         return exists
-
     
     def insert_user(self, user):
         self.usernames.append(user)
