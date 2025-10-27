@@ -25,7 +25,7 @@ class MockUserDatabase():
         return exists
     
     def insert_user(self, user):
-        self.usernames.append(user)
+        self.db[4321] = user
     
     def remove_user(self, user_id):
         if user_id in self.db.keys():
