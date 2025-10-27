@@ -39,7 +39,7 @@ class TestUserService(unittest.TestCase):
 
     def test_get_user(self):
         test_user = self.user_service.get_user(1234)
-        self.assertEqual(test_user, {'username': 'zxhom', 'email':'zxhom26@gmail.com'}})
+        self.assertEqual(test_user, {'username': 'zxhom', 'email':'zxhom26@gmail.com'})
 
     def test_create_user(self):
         test_user = self.user_service.create_user('terra', 'terra@gmail.com')
