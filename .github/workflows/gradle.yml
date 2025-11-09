@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout the repo
+      # 1️⃣ Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -22,16 +22,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # 3️⃣ Cache Gradle dependencies for faster builds
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper/
-          key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: gradle-
+      # 3️⃣ Install Gradle system-wide
+      - name: Install Gradle
+        run: sudo apt-get update && sudo apt-get install -y gradle
 
       # 4️⃣ Run Gradle tests
       - name: Build and test with Gradle
-        run: ./gradlew clean test
+        run: gradle clean test
