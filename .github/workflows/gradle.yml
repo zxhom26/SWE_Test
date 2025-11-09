@@ -28,4 +28,4 @@ jobs:
 
       # 4️⃣ Run Gradle tests
       - name: Build and test with Gradle
-        run: gradle clean test
+        run: ./gradlew clean test
