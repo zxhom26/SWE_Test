@@ -1,0 +1,53 @@
+name: Run Java Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Set up Java (change version if needed)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 3️⃣ Cache Maven/Gradle dependencies (optional but speeds up builds)
+      - name: Cache Maven packages
+        if: exists('pom.xml')
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Cache Gradle packages
+        if: exists('build.gradle')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # 4️⃣ Run tests depending on your build system
+      - name: Run Maven tests
+        if: exists('pom.xml')
+        run: mvn -B test
+
+      - name: Run Gradle tests
+        if: exists('build.gradle')
+        run: ./gradlew test
